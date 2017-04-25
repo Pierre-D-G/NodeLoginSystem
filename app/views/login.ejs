@@ -1,0 +1,35 @@
+<% include partials/header %>
+
+ <div class="form">
+    <form class="form-horizontal" action='/users/register' method="POST" enctype="multipart/form-data">
+      <fieldset>
+        <div id="legend">
+          <legend class="">Please Login</legend>
+        </div>
+        <div class="control-group">
+          <!-- Username -->
+          <label class="control-label" for="username">Username</label>
+          <div class="controls">
+            <input type="text" id="username" name="username" class="input-xlarge">
+            <p class="help-block">Enter your username</p>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <!-- Password-->
+          <label class="control-label" for="password">Password</label>
+          <div class="controls">
+            <input type="password" id="password" name="password" class="input-xlarge">
+            <p class="help-block">Enter your password</p>
+          </div>
+        </div>
+        <div class="control-group">
+          <!-- Button -->
+          <div class="controls">
+            <button class="btn btn-success" type="submit" value="login">Login</button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+<% include partials/footer %>
