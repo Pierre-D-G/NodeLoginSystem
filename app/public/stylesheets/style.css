@@ -6,3 +6,12 @@ body {
 a {
   color: #00B7FF;
 }
+
+.form{
+  margin: 0 auto;
+  margin-top: 10px;
+  width: 500px;
+  border: 2px solid #9ca1a8;
+  border-radius: 5px;
+  padding: 15px;
+}
