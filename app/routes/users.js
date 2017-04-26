@@ -13,36 +13,75 @@ router.get('/login', function (req, res, next) {
   res.render('login')
 });
 
-router.post('/users/register', function (req, res, next) {
+router.post('/register', function (req, res, next) {
   // Getting form data
   var name = req.body.name,
     email = req.body.email,
     username = req.body.username,
-    password = request.body.password,
-    password2 = req.body.password2
-
-  // Checking for images field
-  if (req.files.profileImage) {
-    console.log('Uploading file');
-
-    //  file info
-    var profileImageOriginalName = req.files.profileImage.originalname,
-      profileImageName = req.files.profileImage.name,
-      profileImageMime = req.files.profileImage.mimetype,
-      profileImagePath = req.files.profileImage.path,
-      profileImageExt = req.files.profileImage.extension,
-      profileImageSize = req.files.profileImage.size
-  } else {
-    // set default image
-    var profileImageName = 'defaultImage.png',  // Add an image with whatever name you want the default user profile image to be into the uploads folder
-  }
+    password = req.body.password,
+    confirmPassword = req.body.confirmPassword
 
   // Form Validation with express validator
-  req.checkBody('name', 'You cannot have a blank name').notEmpty();
-  req.checkBody('email', 'An email address is required to register').notEmpty();
-  req.checkBody('name', 'Please enter a valid email address').isEmail();
-  req.checkBody('password', 'A password is required').notEmpty();
-  req.checkBody('password2', 'Passwords do not match').equals(req.body.password)
-});
+  req.checkBody('name', 'A name is required to register').notEmpty();
+  req.checkBody('email', 'You have entered an invalid email address').isEmail();
+  req.checkBody('username', 'Please choose a username').notEmpty();
+  req.checkBody('password', 'Password is required').notEmpty();
+  req.checkBody('confirmPassword', 'Passwords do not match').equals(req.body.password);
+
+	var errors = req.validationErrors();
+
+	if(errors){
+		res.render('register',{
+			errors:errors
+		});
+	} else {
+		var newUser = new User({
+			name: name,
+			email:email,
+			username: username,
+			password: password
+		});
+
+		User.createUser(newUser, function(err, user){
+			if(err) throw err;
+			console.log(user);
+		});
+
+		req.flash('success_msg', 'You are registered and can now login');
+
+		res.redirect('/users/login');
+	}
+  });
+
+  // if (errors) {
+  //   // show register page if any validation errors
+  //   res.render('register', {
+  //     errors: errors,
+  //     // To keep fields that pass validate the same instead of clearing them if there is a validation error
+  //     name: name,
+  //     email: email,
+  //     username: username,
+  //     password: password,
+  //     password2: password2
+  //   })
+  // } else {
+  //   var newUser = new user({
+  //     name: name,
+  //     email: email,
+  //     username: username,
+  //     password: password,
+  //     profileImage: profileImageName
+  //   });
+  //  Creating User
+  //     User.createUser(newUser, function (err, user) {
+  //       if (err) throw err;
+  //       console.log(user);
+  //     });
+  //     // Message to user for successful registration
+  //     req.flash('success', 'You have been registered successly and can now login');
+  //     // Takie user back to home page
+  //     res.location('/');
+  //     res.redirect('/');
+// });
 
 module.exports = router;

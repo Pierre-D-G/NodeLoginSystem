@@ -3,12 +3,12 @@ var express = require('express'),
     favicon = require('serve-favicon'),
     logger = require('morgan'),
     cookieParser = require('cookie-parser'),
+    exphbs = require('express-handlebars')
     session = require('express-session'),
     passport = require('passport'),
     localStrategy = require('passport-local')
     bodyParser = require('body-parser'),
     ExpressValidator = require('express-validator'),
-    multer = require('multer'),
     flash = require('connect-flash'),
     mongo = require('mongodb'),
     mongoose = require('mongoose')
@@ -24,12 +24,13 @@ var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.engine('handlebars', exphbs({
+  defaultLayout: 'main',
+  layoutsDir:'app/views/layouts'
+}));
+app.set('view engine', 'handlebars');
 
-// Handle file uploads
-var upload = multer({
-  dest: './uploads'
-});
+
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -62,8 +63,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
   secret: 'secret',
-  saveUninitialized: true,
-  resave: true
+  saveUninitialized: false,
+  resave: false
 }));
 
 // Passport
@@ -81,22 +82,23 @@ app.use(function (req, res, next) {
 app.use('/', index);
 app.use('/users', users);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
+// // catch 404 and forward to error handler
+// app.use(function(req, res, next) {
+//   var err = new Error('Not Found');
+//   err.status = 404;
+//   next(err);
+// });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+// // error handler
+// app.use(function(err, req, res, next) {
+//   // set locals, only providing error in development
+//   res.locals.message = err.message;
+//   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
+//   // render the error page
+//   res.status(err.status || 500);
+//   // res.render('error');
+//   res.redirect('users/register')
+// });
 
 module.exports = app;
