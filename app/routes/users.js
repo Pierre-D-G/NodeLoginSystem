@@ -1,12 +1,15 @@
 var express = require('express');
 var router = express.Router();
 
+var User = require('../models/user')
+
 router.get('/', function (req, res, next) {
   res.send('User Panel')
 });
 
 router.get('/register', function (req, res, next) {
-  res.render('register')
+  res.render('register', { success: req.session.success, errors: req.session.errors});
+  req.session.errors = null;
 });
 
 router.get('/login', function (req, res, next) {
@@ -27,12 +30,12 @@ router.post('/register', function (req, res, next) {
   req.checkBody('username', 'Please choose a username').notEmpty();
   req.checkBody('password', 'Password is required').notEmpty();
   req.checkBody('confirmPassword', 'Passwords do not match').equals(req.body.password);
+  
 
 	var errors = req.validationErrors();
-
 	if(errors){
 		res.render('register',{
-			errors:errors
+      errors:errors,
 		});
 	} else {
 		var newUser = new User({
@@ -47,41 +50,10 @@ router.post('/register', function (req, res, next) {
 			console.log(user);
 		});
 
-		req.flash('success_msg', 'You are registered and can now login');
+		req.flash('success_msg', 'You have registered successfully and can now login');
 
 		res.redirect('/users/login');
 	}
   });
-
-  // if (errors) {
-  //   // show register page if any validation errors
-  //   res.render('register', {
-  //     errors: errors,
-  //     // To keep fields that pass validate the same instead of clearing them if there is a validation error
-  //     name: name,
-  //     email: email,
-  //     username: username,
-  //     password: password,
-  //     password2: password2
-  //   })
-  // } else {
-  //   var newUser = new user({
-  //     name: name,
-  //     email: email,
-  //     username: username,
-  //     password: password,
-  //     profileImage: profileImageName
-  //   });
-  //  Creating User
-  //     User.createUser(newUser, function (err, user) {
-  //       if (err) throw err;
-  //       console.log(user);
-  //     });
-  //     // Message to user for successful registration
-  //     req.flash('success', 'You have been registered successly and can now login');
-  //     // Takie user back to home page
-  //     res.location('/');
-  //     res.redirect('/');
-// });
 
 module.exports = router;

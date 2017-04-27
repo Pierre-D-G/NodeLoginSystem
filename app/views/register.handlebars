@@ -1,11 +1,11 @@
 <div class="form">
-  {{# if errors}}
-      {{# each errors}}
+  {{#if errors}}
+      {{#each errors}}
         <div class="alert alert-danger">{{this.msg}}</div>
-      {{/each}}
+      {{/each }}
 {{/if}}
   <p>Please register by filling in the form below</p>
-  <form action="/users/register" method="POST" enctype="multipart/form-data" class="form-horizontal">
+  <form action="/users/register" method="POST" class="form-horizontal">
     <fieldset>
       <div id="legend">
         <legend>Register</legend>
@@ -14,7 +14,7 @@
         <!-- Name-->
         <label for="yourname" class="control-label">Name</label>
         <div class="controls">
-          <input id="yourname" type="text" name="name" placeholder="" class="input-xlarge"/>
+          <input id="yourname" type="text" name="name" value="{{name}}" placeholder="" class="input-xlarge"/>
           <p class="help-block">Please enter your name</p>
         </div>
       </div>
@@ -22,7 +22,7 @@
         <!-- Username-->
         <label for="username" class="control-label">Username</label>
         <div class="controls">
-          <input id="username" type="text" name="username" placeholder="" class="input-xlarge"/>
+          <input id="username" type="text" name="username" value="username" class="input-xlarge"/>
           <p class="help-block">Please enter your desired username</p>
         </div>
       </div>
@@ -30,7 +30,7 @@
         <!-- E-mail-->
         <label for="email" class="control-label">E-mail</label>
         <div class="controls">
-          <input id="email" type="text" name="email" placeholder="" class="input-xlarge"/>
+          <input id="email" type="text" name="email" class="input-xlarge"/>
           <p class="help-block">Please provide your E-mail</p>
         </div>
       </div>
@@ -38,7 +38,7 @@
         <!-- Password-->
         <label for="password" class="control-label">Password</label>
         <div class="controls">
-          <input id="password" type="password" name="password" placeholder="" class="input-xlarge"/>
+          <input id="password" type="password" name="password"  class="input-xlarge"/>
           <p class="help-block">Password should be at least 4 characters</p>
         </div>
       </div>
@@ -46,16 +46,8 @@
       <div class="control-group">
         <label for="password2" class="control-label">Confirm Password</label>
         <div class="controls">
-          <input id="password2" type="password" name="confirmPassword" placeholder="" class="input-xlarge"/>
+          <input id="password2" type="password" name="confirmPassword" class="input-xlarge"/>
           <p class="help-block">Re-enter password</p>
-        </div>
-      </div>
-      <!-- Profile Image-->
-      <div class="control-group">
-        <label for="profilePic" class="control-label"></label>
-        <div class="controls">
-          <input id="profilePic" type="file" name="profileImage"/>
-          <p class="help-block">Upload your desired profile picture</p>
         </div>
       </div>
       <div class="control-group">
