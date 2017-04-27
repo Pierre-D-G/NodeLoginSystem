@@ -12,9 +12,6 @@ var express = require('express'),
     flash = require('connect-flash'),
     mongo = require('mongodb'),
     mongoose = require('mongoose')
-    
-
-mongoose.connect("mongodb://localhost/nodeauth")
 
 // ROUTES
 var index = require('./routes/index');

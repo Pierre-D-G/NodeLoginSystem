@@ -8,8 +8,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/register', function (req, res, next) {
-  res.render('register', { success: req.session.success, errors: req.session.errors});
-  req.session.errors = null;
+  res.render('register');
 });
 
 router.get('/login', function (req, res, next) {
