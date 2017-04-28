@@ -1,14 +1,17 @@
 <div class="form">
-  <form action="/users/register" method="POST" enctype="multipart/form-data" class="form-horizontal">
+  <form action="/users/login" method="POST" class="form-horizontal">
     <fieldset>
       <div id="legend">
-        <legend>Please Login</legend>
+        <div class="login-image">
+          <img src="../images/login.jpg">
+        </div>
+        <legend>Type in your username and password to login</legend>
       </div>
       <div class="control-group">
         <!-- Username-->
         <label for="username" class="control-label">Username</label>
         <div class="controls">
-          <input id="username" type="text" name="username" class="input-xlarge"/>
+          <input id="username" type="text" name="username" class="input-xlarge" />
           <p class="help-block">Enter your username</p>
         </div>
       </div>
@@ -16,14 +19,14 @@
         <!-- Password-->
         <label for="password" class="control-label">Password</label>
         <div class="controls">
-          <input id="password" type="password" name="password" class="input-xlarge"/>
+          <input id="password" type="password" name="password" class="input-xlarge" />
           <p class="help-block">Enter your password</p>
         </div>
       </div>
       <div class="control-group">
         <!-- Button-->
         <div class="controls">
-          <button type="submit" value="login" class="btn btn-success">Login</button>
+          <button type="submit" value="login" class="btn btn-primary">Login</button>
         </div>
       </div>
     </fieldset>

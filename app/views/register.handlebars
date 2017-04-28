@@ -4,11 +4,11 @@
         <div class="alert alert-danger">{{this.msg}}</div>
       {{/each }}
 {{/if}}
-  <p>Please register by filling in the form below</p>
   <form action="/users/register" method="POST" class="form-horizontal">
     <fieldset>
       <div id="legend">
-        <legend>Register</legend>
+        <p>Please register by filling in the form below</p>
+        <legend>Registration</legend>
       </div>
       <div class="control-group">
         <!-- Name-->
@@ -53,7 +53,7 @@
       <div class="control-group">
         <!-- Button-->
         <div class="controls">
-          <button type="submit" class="btn btn-success">Register</button>
+          <button type="submit" class="btn btn-primary">Register</button>
         </div>
       </div>
     </fieldset>
