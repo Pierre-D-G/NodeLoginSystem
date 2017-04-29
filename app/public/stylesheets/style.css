@@ -3,15 +3,35 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00B7FF;
+.navbar-inverse{
+  background-color: #2070db;
+  border-color: #2070db;
+}
+
+.navbar-inverse .navbar-brand {
+  color: #fff;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #fff;
 }
 
 .form{
   margin: 0 auto;
   margin-top: 10px;
-  width: 500px;
+  max-width: 500px;
   border: 2px solid #9ca1a8;
   border-radius: 5px;
   padding: 15px;
+}
+
+.login-image{
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+div.control-group,
+legend,
+#legend{
+  text-align: center;
 }
