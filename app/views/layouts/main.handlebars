@@ -28,12 +28,15 @@
       </div>
       <div id="bs-example-navbar-collapse-1" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
+          {{#if user}}
           <li><a href="/">Members</a></li>
-          <li><a href="/users/register">Register</a></li>
-          <li><a href="/users/login">Login</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
           <li><a href="/users/logout">Logout</a></li>
+        </ul>
+        {{else}}
+        <ul class="nav navbar-nav navbar-right">
+           <li><a href="/users/register">Register</a></li>
+           <li><a href="/users/login">Login</a></li>
+          {{/if}}
         </ul>
       </div>
     </div>
@@ -42,21 +45,28 @@
 
   <div id="content">
     <div class="container">
-      {{{body}}}
-      <!--Where the content from other handlebars templates appears-->
-    </div>
-  </div>
-
-  <hr>
-  <footer>
-    <div class="row">
-      <div class="col-lg-12">
-        <p>Copyright © User Login 2017</p>
+        {{#if success_msg}}
+        <div class="alert alert-success">{{success_msg}}</div>
+        {{/if}} {{#if error_msg}}
+        <div class="alert alert-danger">{{error_msg}}</div>
+        {{/if}} {{#if error}}
+        <div class="alert alert-danger">{{error}}</div>
+        {{/if}} 
+        {{{body}}}
+        <!--Where the content from other handlebars templates appears-->
       </div>
     </div>
-  </footer>
-  <script src="../javascripts/jquery-3.2.0.min.js"></script>
-  <script src="../javascripts/bootstrap.js"></script>
+
+    <hr>
+    <footer>
+      <div class="row">
+        <div class="col-lg-12">
+          <p>Copyright © User Login 2017</p>
+        </div>
+      </div>
+    </footer>
+    <script src="../javascripts/jquery-3.2.0.min.js"></script>
+    <script src="../javascripts/bootstrap.js"></script>
 </body>
 
 </html>
