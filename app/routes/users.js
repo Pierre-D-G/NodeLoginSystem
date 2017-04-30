@@ -37,6 +37,7 @@ router.post('/register', function (req, res, next) {
       errors: errors,
     });
   } else {
+    // New Data
     var newUser = new User({
       name: name,
       email: email,
@@ -44,6 +45,7 @@ router.post('/register', function (req, res, next) {
       password: password
     });
 
+// Creating user and saving user to the database
    User.createUser(newUser, function(err, user){
 			if(err) throw err;
 			console.log(user);
@@ -56,6 +58,7 @@ router.post('/register', function (req, res, next) {
   }
 });
 
+// Autherization with passport
 passport.use(new localStrategy(function (username, password, done) {
   // Checking if username exists
   User.getUserByUsername(username, function (err, user) {
@@ -80,7 +83,7 @@ passport.use(new localStrategy(function (username, password, done) {
     });
 }));
 
-// Passport Authentication
+// Passport Serialzation for express sessions
 passport.serializeUser(function (user, done) {
   done(null, user.id);
 });
@@ -92,6 +95,7 @@ passport.deserializeUser(function (id, done) {
 });
 
 
+// Login Route
 router.post('/login',
   passport.authenticate('local', {
     failureRedirect: '/users/login',
