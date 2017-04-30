@@ -16,8 +16,17 @@ Mongoose
 
 PassportJs - User Authentication
 
-Bcryt - Encyption
+Bcrytjs - Encyption
 
+### Usage
+
+Install mongodb
+
+npm install -  to install dependancies
+
+npm start - to run the app
+
+Navaigate to: ### localhost:3000 in your browser to use
 
 
 
